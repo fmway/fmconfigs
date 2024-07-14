@@ -33,6 +33,23 @@ dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
 require "nvchad.autocmds"
+require "configs.filetype"
+
+vim.filetype.add {
+  filename = {
+    ["build.zig.zon"] = "zig",
+  },
+  pattern = {
+    ['.*%.blade%.php'] = 'blade',
+  },
+}
+
+vim.cmd([[
+" Set the *.blade.php file to be filetype of blade 
+augroup BladeFiltypeRelated
+  au BufNewFile,BufRead *.blade.php set ft=blade
+augroup END
+]])
 
 vim.schedule(function()
   require "mappings"
